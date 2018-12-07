@@ -6,11 +6,45 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api/getDiscList': {
+        target: 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg',
+        bypass: function (req, res, proxyOptions) {
+          req.headers.referer = 'https://c.y.qq.com';
+          req.headers.host = 'c.y.qq.com';
+        },
+        pathRewrite: {
+          '^/api/getDiscList': ''
+        }
+      },
+      '/j': {
+        target: 'https://movie.douban.com',
+        bypass: function (req, res, proxyOptions) {
+          req.headers.referer = 'https://movie.douban.com/explore';
+          req.headers.host = 'movie.douban.com';
+          changeOrigin: true
+        },
+        changeOrigin:true,
+        pathRewrite: {
+          '/j': '/j'
+        }
+      },
+      '/api/container': {
+        target: 'https://m.weibo.cn',
+          bypass: function (req, res, proxyOptions) {
+          req.headers.referer = 'https://m.weibo.cn/u/5366309435?rightmod=1&wvr=6&mod=personnumber&is_all=1&jumpfrom=weibocom';
+          // req.headers.host = '';
+          changeOrigin: true
+        },
+        changeOrigin:true,
+          pathRewrite: {
+          '/api/container': '/api/container'
+        }
+      },
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
