@@ -1,10 +1,17 @@
 <template>
+
   <div id="app">
+    <transition name="fade">
     <keep-alive>
+
     <router-view  class="order"></router-view>
+
       </keep-alive>
+    </transition>
     <!--<router-view name="sub" class="order"></router-view>-->
+
   </div>
+
 </template>
 
 <script>
@@ -22,22 +29,11 @@ export default {
 }
 </script>
 
-<style>
-.active{
-  color:#ffcd32!important;
-}
-  .tab{
-    width:24%;
-    line-height: 50px;
-    text-align: center;
-    color: white;
-    display: inline-block;
-    height:50px;
+<style >
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
   }
-  .order{
-    width:100%;
-    height: auto;
-    background-color: #0e0e0e;
-
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>

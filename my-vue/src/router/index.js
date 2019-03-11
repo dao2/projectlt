@@ -11,7 +11,7 @@ import aub from 'src/components/aub'
 import sy from 'src/components/sy'
 Vue.use(Router)
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '',
@@ -66,8 +66,7 @@ export default new Router({
         {
           path: 'sy',
           name: 'sy',
-          component: sy
-
+          component: sy,
         }
         ]
     }

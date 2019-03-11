@@ -38,6 +38,18 @@
         players: ['kobe', 'fisher', 'jordan', 'shark', 'duncun']
       }
     },
+    beforeRouteEnter: (to, from, next) => {
+      if (to.path === '/info') {
+        next();
+      } else {
+        let token = localStorage.getItem('loginname');
+        if (token === '李四' || token === '') {
+          next('/info');
+        } else {
+          next();
+        }
+      }
+    },
     methods: {
       load(resolve){
         setTimeout(() => {

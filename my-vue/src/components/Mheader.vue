@@ -3,7 +3,7 @@
         <div class="icon"></div>
         <h1 class="text">Chicken Music</h1>
 
-        <router-link tag="div" class="mine" to="/user">
+        <router-link tag="div" class="mine" to="/info">
             <i class="icon-mine"></i>
         </router-link>
     </div>
@@ -43,4 +43,22 @@
                 padding: 12px
                 font-size: 20px
                 color: $color-theme
+
+    .active{
+        color:#ffcd32!important;
+    }
+    .tab{
+        width:23%;
+        line-height: 50px;
+        text-align: center;
+        color: white;
+        display: inline-block;
+        height:50px;
+    }
+    .order{
+        width:100%;
+        height: auto;
+        background-color: #0e0e0e;
+
+    }
 </style>
