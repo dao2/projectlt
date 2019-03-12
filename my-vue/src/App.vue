@@ -17,6 +17,8 @@
 <script>
   import Mheader from "components/Mheader"
 export default {
+
+
   components:{
     Mheader
   },

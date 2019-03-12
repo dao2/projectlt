@@ -1,6 +1,6 @@
 <template>
-       <div style="position: fixed;top: 94px;width: 100%;;bottom: 0" ref="recommend">
-           <scroll ref="scroll" class="recommend-content" :pullup="true"  :data="list"
+       <div style="position: fixed;top: 94px;width: 100%;;bottom: 0" ref="recommend" id="il">
+           <scroll ref="scroll" class="recommend-content" id="hj" :pullup="true"  :data="list"
                    @scrollToEnd="scrollToEnd"
                    :listenScroll="true"
                    @scroll="scroll"
@@ -18,7 +18,7 @@
                    <!--:height="hh1+'px'"-->
               <div class="goods_wrapper"  style="overflow: hidden; "  >
                        <ul class="content" >
-                           <li v-for="item in list" class="commonflex">
+                           <li v-for="item in list" class="commonflex" @click="go">
                                <img v-lazy="item.imgurl" width="50px" >
                                <div> {{item.dissname}}</div>
                            </li>
@@ -38,8 +38,22 @@
     import img from '../../assets/logo.png'
     import scroll from '../scroll'
     let sum;
+    let top;
     sum=0;
    export default{
+     beforeRouteLeave (to, from, next) {
+        debugger
+       // this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop|| window.pageYOffset
+       this.scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop || 0;
+
+       next()
+     },
+     beforeRouteEnter (to, from, next) {
+
+       next(vm => {
+         document.body.scrollTop = vm.scrollTop
+       })
+     },
     data(){
       return{
         slider:[],
@@ -50,6 +64,7 @@
         scrollY:0,
         scrolly:0,
         show:false,
+        homeTop:0
       }
 
     },
@@ -58,10 +73,19 @@
      },
    created(){
      this._getrecommad()
-     var h = document.documentElement.clientHeight || document.body.clientHeight;
+
      this._getDiscList()
      // this._doubandianying()
    },
+     mounted(){
+       // window.addEventListener('scroll', () => {
+       //   var scrollTop = this.$el.querySelector('#il')
+       //   // console.log(scrollTop.scrollHeight)
+       //   console.log("ccccccccccccccccccccccccccc"+scrollTop.scrollTop) // 查看打印的值是否有变化 如果有 则说明滚滚动条在这个标签中
+       //   // scrollTop.scrollTop = scrollTop.scrollHeight // 可以尝试下 滚动滚动条。一直在底部则可以设置成功
+       // }, true)
+
+     },
     methods:{
       // tiao:function(){
       //   this.$router.push({path:"/info"})
@@ -71,6 +95,9 @@
       //
       //   })
       // },
+      go:function(){
+          this.$router.push({path:'/info'})
+      },
       _doubandianying(){
         douban1().then((res)=>{
           if(res.code===0){

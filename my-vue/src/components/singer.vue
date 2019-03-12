@@ -8,7 +8,7 @@
                 <p>{{item.title}}</p>
                 <div>
                     <li v-for="b in item.item" class="commonflex">
-                        <div > {{b.name}}</div>
+                        <div  @click="go"> {{b.name}}</div>
                     </li>
                 </div>
             </ul>
@@ -32,10 +32,29 @@ import {getsingerlist} from 'src/api/singer';
         a:[],
       }
     },
+    beforeRouteLeave (to, from, next) {
+
+debugger
+
+      // this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop|| window.pageYOffset
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop ||document.body.scrollTop || 0;
+      next()
+    },
+    beforeRouteEnter (to, from, next) {
+
+      next(vm => {
+        debugger
+        document.body.scrollTop = vm.scrollTop
+      })
+    },
     created(){
       this._getsingerlist()
     },
     methods:{
+      go:function(){
+        this.$router.push({path:'/info'})
+      },
+
       increment(){
         this.$store.commit('count/increment')
       },

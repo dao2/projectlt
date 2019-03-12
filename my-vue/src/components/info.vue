@@ -1,6 +1,6 @@
 <template>
     <div class="bgp">
-        <img src="../assets/login-font.png" class="slogan">
+        <img src="../assets/login-font.png" class="slogan" @click="back" >
         <div class="login-form">
             <p>login</p>
             <input type="text" placeholder="登录名" class="login-btn" v-model="Loginname">
@@ -30,6 +30,9 @@
       console.log(localStorage.getItem("loginname"))
     },
     methods:{
+      back:function(){
+        this.$router.go(-1)
+      },
       login:function () {
         if(!this.Loginname||!this.Loginpwd){
           MessageBox.alert("用户名或密码不能为空");

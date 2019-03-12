@@ -39,7 +39,8 @@
       // greet: function (event) {
       //   this.$router.push({path:"/info"})
       // }
-    }
+    },
+
   }
 </script>
 
@@ -74,7 +75,7 @@
          text-align: left;
      }
     body{
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
  .active{
      color:#ffcd32!important;
